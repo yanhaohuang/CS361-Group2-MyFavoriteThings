@@ -5,7 +5,6 @@ import android.os.Environment;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.GridView;
 import android.widget.TextView;
@@ -18,7 +17,7 @@ public class Main3Activity extends AppCompatActivity {
 
     private FloatingActionButton addNewFavorite;
     private TextView initialMessage;
-    String backupPath = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES).toString() + "/saved_images";
+    String backupPath = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES).toString() + "/favorite_things";
     String name;
     GridView gridview;
     ArrayList<String> imagenames = new ArrayList<>();
@@ -56,17 +55,12 @@ public class Main3Activity extends AppCompatActivity {
 
     public void readfile()
     {
-        //File sdCardRoot = Environment.getExternalStorageDirectory();
         File yourDir = new File(backupPath);
-        int i=0;
         for (File f : yourDir.listFiles()) {
             if (f.isFile())
                 name = f.getName();
             imagenames.add( backupPath+"/"+name);
-            Log.i("Favorite Things", "imagenames["+i+"]= "+name);
-            i++;
 
-            // make something with the name
         }
     }
 }

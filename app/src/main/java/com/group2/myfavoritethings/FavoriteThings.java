@@ -38,7 +38,6 @@ public class FavoriteThings extends BaseAdapter {
 
     @Override
     public ImageView getView(int position, View convertView, ViewGroup parent) {
-        // ImageView i = new ImageView(mContext);
         ImageView imageView;
         imageView = new ImageView(mContext);
         if (convertView == null) {
@@ -51,12 +50,10 @@ public class FavoriteThings extends BaseAdapter {
             imageView = (ImageView) convertView;
         }
 
-        Bitmap b= BitmapFactory.decodeFile(imagenames.get(position).toString());
-        Log.i("Favorite Things", "Position"+position+" "+b.getHeight());
+        Bitmap b= BitmapFactory.decodeFile(imagenames.get(position));
         imageView.setImageBitmap(b);
 
         imageView.setScaleType(ImageView.ScaleType.FIT_CENTER);
-        /* Set the Width/Height of the ImageView. */
         imageView.setLayoutParams(new GridView.LayoutParams(300, 300));
         return imageView;
     }
