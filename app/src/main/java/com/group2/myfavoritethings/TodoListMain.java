@@ -11,7 +11,7 @@ import android.widget.ListView;
 import android.widget.Toast;
 import java.util.ArrayList;
 
-public class Main2Activity extends AppCompatActivity implements View.OnClickListener, AdapterView.OnItemClickListener {
+public class TodoListMain extends AppCompatActivity implements View.OnClickListener, AdapterView.OnItemClickListener {
     private EditText itemET;
     private Button btn;
     private ListView itemsList;
@@ -21,7 +21,7 @@ public class Main2Activity extends AppCompatActivity implements View.OnClickList
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main2);
+        setContentView(R.layout.todo_list_main);
         itemET = findViewById(R.id.item_edit_text);
         btn = findViewById(R.id.add_btn);
         itemsList = findViewById(R.id.items_list);
