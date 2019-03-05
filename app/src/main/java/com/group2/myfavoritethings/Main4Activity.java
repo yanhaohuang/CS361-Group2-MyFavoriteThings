@@ -15,8 +15,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.ImageView;
-
-import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.util.Random;
@@ -83,11 +81,8 @@ public class Main4Activity extends AppCompatActivity {
                     ImageView imageView = findViewById(R.id.imageView);
                     imageView.setImageBitmap(bitmap);
 
-                    Log.i("Image Selected", "Good work");
-
-
                     String root = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES).toString();
-                    File myDir = new File(root + "/saved_images");
+                    File myDir = new File(root + "/favorite_things");
                     myDir.mkdirs();
                     Random generator = new Random();
                     int n = 10000;
@@ -116,9 +111,6 @@ public class Main4Activity extends AppCompatActivity {
                                 }
                             });
 
-                    Intent i = new Intent(this, Main3Activity.class);
-                    i.putExtra("Image", file.getParent() + "/" + fname );
-                    startActivity(i);
                 } catch (Exception e) {
                     Log.i("didn't make it", "didn't make it");
                     e.printStackTrace();
