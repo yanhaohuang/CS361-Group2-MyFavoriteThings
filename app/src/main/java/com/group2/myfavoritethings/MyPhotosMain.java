@@ -13,7 +13,7 @@ import android.widget.Toast;
 import java.io.File;
 import java.util.ArrayList;
 
-public class Main3Activity extends AppCompatActivity {
+public class MyPhotosMain extends AppCompatActivity {
 
     private FloatingActionButton addNewFavorite;
     private TextView initialMessage;
@@ -31,7 +31,7 @@ public class Main3Activity extends AppCompatActivity {
         {
 
         }
-        setContentView(R.layout.activity_main3);
+        setContentView(R.layout.my_photos_main);
         addNewFavorite = findViewById(R.id.addNewFavorite);
         addNewFavorite.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -62,6 +62,7 @@ public class Main3Activity extends AppCompatActivity {
             imagenames.add( backupPath+"/"+name);
 
         }
+        setContentView(R.layout.my_photos_main);
     }
 }
 
