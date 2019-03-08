@@ -14,17 +14,23 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.Toast;
+
 import java.io.File;
 import java.io.FileOutputStream;
 import java.util.Random;
 
-public class Main4Activity extends AppCompatActivity {
+public class AddPhotos extends AppCompatActivity {
+
+    private Button addingButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main4);
+        setContentView(R.layout.add_photos);
 
         if (checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
             requestPermissions(new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, 1);
@@ -119,4 +125,9 @@ public class Main4Activity extends AppCompatActivity {
         }
     }
 
+    public void addingNewFave(View view) {
+        Toast.makeText(this, "Added New Favorite Thing", Toast.LENGTH_SHORT).show();
+        Intent intent = new Intent(this, MyPhotosMain.class);
+        startActivity(intent);
+    }
 }

@@ -12,7 +12,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Main4Activity"></activity>
+        <activity android:name=".AddPhotos"></activity>
         <activity android:name=".MyPhotosMain"></activity>
         <activity android:name=".TodoListMain" />
         <activity android:name=".MainActivity">

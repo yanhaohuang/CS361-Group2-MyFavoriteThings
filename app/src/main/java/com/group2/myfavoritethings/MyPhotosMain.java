@@ -36,20 +36,22 @@ public class MyPhotosMain extends AppCompatActivity {
         addNewFavorite.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                addNewFave();
+                addNewFave(v);
             }
         });
         initialMessage = findViewById(R.id.initialMessage);
         gridview= findViewById(R.id.gridview);
         gridview.setAdapter(new FavoriteThings(this, imagenames));
+
+        // If there are any images in the favorite_things folder then we should change the default string
         if( imagenames.size() > 0 ){
-            initialMessage.setText("");
+            initialMessage.setText("Favorite Things");
         }
     }
 
-    public void addNewFave() {
+    public void addNewFave( View v ) {
         Toast.makeText(this, "Add New Favorite Thing", Toast.LENGTH_SHORT).show();
-        Intent intent = new Intent(this, Main4Activity.class);
+        Intent intent = new Intent(this, AddPhotos.class);
         startActivity(intent);
     }
 
