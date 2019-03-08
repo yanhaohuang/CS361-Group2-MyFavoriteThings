@@ -16,6 +16,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -25,7 +26,7 @@ import java.util.Random;
 
 public class AddPhotos extends AppCompatActivity {
 
-    private Button addingButton;
+    private Bitmap favoriteImage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -83,39 +84,9 @@ public class AddPhotos extends AppCompatActivity {
         if (requestCode == 1 && resultCode == RESULT_OK && data != null) {
             if (isStoragePermissionGranted()) {
                 try {
-                    Bitmap bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), selectedImage);
+                    favoriteImage = MediaStore.Images.Media.getBitmap(this.getContentResolver(), selectedImage);
                     ImageView imageView = findViewById(R.id.imageView);
-                    imageView.setImageBitmap(bitmap);
-
-                    String root = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES).toString();
-                    File myDir = new File(root + "/favorite_things");
-                    myDir.mkdirs();
-                    Random generator = new Random();
-                    int n = 10000;
-                    n = generator.nextInt(n);
-                    String fname = "Image-" + n + ".jpg";
-                    File file = new File(myDir, fname);
-                    if (file.exists())
-                        file.delete();
-                    try {
-                        FileOutputStream out = new FileOutputStream(file);
-                        bitmap.compress(Bitmap.CompressFormat.JPEG, 90, out);
-                        out.flush();
-                        out.close();
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-
-
-                    // Tell the media scanner about the new file so that it is
-                    // immediately available to the user.
-                    MediaScannerConnection.scanFile(this, new String[]{file.toString()}, null,
-                            new MediaScannerConnection.OnScanCompletedListener() {
-                                public void onScanCompleted(String path, Uri uri) {
-                                    Log.i("ExternalStorage", "Scanned " + path + ":");
-                                    Log.i("ExternalStorage", "-> uri=" + uri);
-                                }
-                            });
+                    imageView.setImageBitmap(favoriteImage);
 
                 } catch (Exception e) {
                     Log.i("didn't make it", "didn't make it");
@@ -125,7 +96,38 @@ public class AddPhotos extends AppCompatActivity {
         }
     }
 
+    public void setImageName(){
+        EditText fileName = findViewById(R.id.editText);
+        String finalFileName = fileName.getText().toString() + ".jpg";
+        String root = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES).toString();
+        File myDir = new File(root + "/favorite_things");
+        myDir.mkdirs();
+        File file = new File(myDir, finalFileName);
+        if (file.exists())
+            file.delete();
+        try {
+            FileOutputStream out = new FileOutputStream(file);
+            favoriteImage.compress(Bitmap.CompressFormat.JPEG, 90, out);
+            out.flush();
+            out.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+
+        // Tell the media scanner about the new file so that it is
+        // immediately available to the user.
+        MediaScannerConnection.scanFile(this, new String[]{file.toString()}, null,
+                new MediaScannerConnection.OnScanCompletedListener() {
+                    public void onScanCompleted(String path, Uri uri) {
+                        Log.i("ExternalStorage", "Scanned " + path + ":");
+                        Log.i("ExternalStorage", "-> uri=" + uri);
+                    }
+                });
+    }
+
     public void addingNewFave(View view) {
+        setImageName();
         Toast.makeText(this, "Added New Favorite Thing", Toast.LENGTH_SHORT).show();
         Intent intent = new Intent(this, MyPhotosMain.class);
         startActivity(intent);

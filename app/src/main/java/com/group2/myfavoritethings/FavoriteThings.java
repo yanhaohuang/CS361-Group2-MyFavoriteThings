@@ -55,6 +55,7 @@ public class FavoriteThings extends BaseAdapter {
 
         imageView.setScaleType(ImageView.ScaleType.FIT_CENTER);
         imageView.setLayoutParams(new GridView.LayoutParams(300, 300));
+        Log.i( "Image Name", imagenames.get(position) );
         return imageView;
     }
 
