@@ -37,7 +37,13 @@ public class FavoriteThings extends BaseAdapter {
         return position;
     }
 
-    public String getItemName( int position ){ return imagenames.get(position); }
+    public String getItemName( int position ){
+        String longFileName = imagenames.get(position);
+        int index = longFileName.lastIndexOf("/");
+        String shortFileName = longFileName.substring( index + 1 );
+        String finalName = shortFileName.substring(0, shortFileName.lastIndexOf(".") );
+        return finalName;
+    }
 
 
     @Override
