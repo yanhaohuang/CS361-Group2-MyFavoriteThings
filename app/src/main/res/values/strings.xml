@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">My Favorite Things</string>
+    <string name="favorite_thing_name">Favorite Thing Name</string>
+    <string name="addThing">Add Thing</string>
+    <string name="add_fave">Add Fave</string>
+    <string name="title_activity_main4">Main4Activity</string>
+    <string name="no_favorite_things">No Favorite Things</string>
+    <string name="todo">TODO</string>
+    <string name="add_this">Add This</string>
 </resources>

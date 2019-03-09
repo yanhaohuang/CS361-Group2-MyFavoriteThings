@@ -17,6 +17,6 @@
         android:id="@+id/button3"
         android:layout_width="match_parent"
         android:layout_height="200dp"
-        android:text="My Photos" />
+        android:text="Favorite Things" />
 
 </LinearLayout>
