@@ -1,8 +1,5 @@
 <resources>
     <string name="app_name">My Favorite Things</string>
-    <string name="helloworld">HELLOWORLD</string>
-    <string name="HelloWorld">TextView</string>
-    <string name="hello_world">Hello World</string>
     <string name="favorite_thing_name">Favorite Thing Name</string>
     <string name="addThing">Add Thing</string>
     <string name="add_fave">Add Fave</string>
