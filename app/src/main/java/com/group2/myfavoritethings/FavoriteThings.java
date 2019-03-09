@@ -111,7 +111,6 @@ public class FavoriteThings extends BaseAdapter {
 
             // Clear out our bitmaps
             b.recycle();
-            resizedBitmap.recycle();
 
         } else {
             linearlayout = (LinearLayout) convertView;
