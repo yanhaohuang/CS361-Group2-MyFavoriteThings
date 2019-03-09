@@ -1,5 +1,6 @@
 package com.group2.myfavoritethings;
 
+// Import Statements
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -15,19 +16,23 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
-
 import java.io.File;
 import java.io.FileOutputStream;
-import java.util.Random;
 
+/**
+ * @author      Jared Sulzdorf
+ * @version     1.0
+ * @since       1.0
+ */
 public class AddPhotos extends AppCompatActivity {
 
+    // The bitmap of the image chosen from the user's camera or other library
     private Bitmap favoriteImage;
 
+    // Loads activity view and checks permissions before proceeding
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,11 +45,13 @@ public class AddPhotos extends AppCompatActivity {
         }
     }
 
+    // Once permission has been granted, moves the user to the media library to pick an image
     public void getPhoto() {
         Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
         startActivityForResult(intent, 1);
     }
 
+    // Checks to see if user has granted permission for accessing media storage
     public boolean isStoragePermissionGranted() {
         String TAG = "Storage Permission";
         if (Build.VERSION.SDK_INT >= 23) {
@@ -64,6 +71,7 @@ public class AddPhotos extends AppCompatActivity {
         }
     }
 
+    // If permission has been granted, run the getPhoto() function
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
@@ -75,6 +83,7 @@ public class AddPhotos extends AppCompatActivity {
         }
     }
 
+    // If a user chooses an image, we make sure that we've gotten it and pass it to our image view for viewing
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -96,6 +105,7 @@ public class AddPhotos extends AppCompatActivity {
         }
     }
 
+    // Once the user has chosen an image, get the name they provided and use it to set the file name
     public void setImageName(){
         EditText fileName = findViewById(R.id.editText);
         String finalFileName = fileName.getText().toString() + ".jpg";
@@ -126,6 +136,7 @@ public class AddPhotos extends AppCompatActivity {
                 });
     }
 
+    // Once the user clicks "Add" set the name of the favorite thing and move the user back to the main view of favorite things.
     public void addingNewFave(View view) {
         setImageName();
         Toast.makeText(this, "Added New Favorite Thing", Toast.LENGTH_SHORT).show();

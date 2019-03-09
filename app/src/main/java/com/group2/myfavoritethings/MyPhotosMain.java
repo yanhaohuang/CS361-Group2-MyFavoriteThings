@@ -1,5 +1,6 @@
 package com.group2.myfavoritethings;
 
+// Imports
 import android.content.Intent;
 import android.os.Environment;
 import android.support.design.widget.FloatingActionButton;
@@ -9,12 +10,17 @@ import android.view.View;
 import android.widget.GridView;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import java.io.File;
 import java.util.ArrayList;
 
+/**
+ * @author      Jared Sulzdorf
+ * @version     1.0
+ * @since       1.0
+ */
 public class MyPhotosMain extends AppCompatActivity {
 
+    // Class variables
     private FloatingActionButton addNewFavorite;
     private TextView initialMessage;
     String backupPath = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES).toString() + "/favorite_things";
@@ -22,6 +28,8 @@ public class MyPhotosMain extends AppCompatActivity {
     GridView gridview;
     ArrayList<String> imagenames = new ArrayList<>();
 
+    // Load the view and check to see if there are any favorite things stored in our favorite_things folder.
+    // If there are, they are shown and we have a different page header, if there aren't we don't.
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,12 +57,14 @@ public class MyPhotosMain extends AppCompatActivity {
         }
     }
 
+    // If the user clicks on the floating button, then move them to that AddPhotos screen
     public void addNewFave( View v ) {
         Toast.makeText(this, "Add New Favorite Thing", Toast.LENGTH_SHORT).show();
         Intent intent = new Intent(this, AddPhotos.class);
         startActivity(intent);
     }
 
+    // Load all of the available images into our view
     public void readfile()
     {
         File yourDir = new File(backupPath);

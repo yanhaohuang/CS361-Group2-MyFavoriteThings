@@ -11,32 +11,45 @@ import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-
 import java.util.ArrayList;
 
+/**
+ * @author      Jared Sulzdorf
+ * @version     1.0
+ * @since       1.0
+ */
 public class FavoriteThings extends BaseAdapter {
+
+    // Class variables
     private Context mContext;
     private ArrayList<String> imagenames;
 
+    // Initialize the class
     public FavoriteThings(Context context, ArrayList<String> images) {
         mContext = context;
         imagenames = images;
     }
+
+    // Get the number of files that we will show
     @Override
     public int getCount() {
         return imagenames.size();
     }
 
+    // Returns the current position in the string array
     @Override
     public Object getItem(int position) {
         return position;
     }
 
+    // Returns the ID of the item in the array which is also it's position
     @Override
     public long getItemId(int position) {
         return position;
     }
 
+    // Returns a shortened version of the filename
+    // Used to build the text underneath each Favorite Thing
     public String getItemName( int position ){
         String longFileName = imagenames.get(position);
         int index = longFileName.lastIndexOf("/");
@@ -45,7 +58,7 @@ public class FavoriteThings extends BaseAdapter {
         return finalName;
     }
 
-
+    // Builds the view for the Favorite Things
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         // https://stackoverflow.com/questions/35158652/how-to-add-textview-inside-a-gridview-filled-with-imageview
@@ -69,9 +82,11 @@ public class FavoriteThings extends BaseAdapter {
                 imageView = (ImageView) convertView;
             }
 
+            // Turn the images into thumbnails to view
             Bitmap b= BitmapFactory.decodeFile(imagenames.get(position));
             imageView.setImageBitmap(b);
 
+            // Position the items
             imageView.setScaleType(ImageView.ScaleType.FIT_CENTER);
             imageView.setLayoutParams(new GridView.LayoutParams(300, 300));
 
@@ -89,6 +104,7 @@ public class FavoriteThings extends BaseAdapter {
             linearlayout = (LinearLayout) convertView;
         }
 
+        // Return everything
         return linearlayout;
     }
 
