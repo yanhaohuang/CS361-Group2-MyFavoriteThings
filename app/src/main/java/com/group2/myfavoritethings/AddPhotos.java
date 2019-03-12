@@ -139,7 +139,6 @@ public class AddPhotos extends AppCompatActivity {
     // Once the user clicks "Add" set the name of the favorite thing and move the user back to the main view of favorite things.
     public void addingNewFave(View view) {
         setImageName();
-        Toast.makeText(this, "Added New Favorite Thing", Toast.LENGTH_SHORT).show();
         Intent intent = new Intent(this, MyPhotosMain.class);
         startActivity(intent);
     }
