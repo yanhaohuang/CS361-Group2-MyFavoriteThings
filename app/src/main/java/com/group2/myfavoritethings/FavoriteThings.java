@@ -3,6 +3,8 @@ package com.group2.myfavoritethings;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.os.Environment;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +13,8 @@ import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import java.io.File;
 import java.util.ArrayList;
 
 /**
@@ -38,8 +42,8 @@ public class FavoriteThings extends BaseAdapter {
 
     // Returns the current position in the string array
     @Override
-    public Object getItem(int position) {
-        return position;
+    public String getItem(int position) {
+        return imagenames.get(position);
     }
 
     // Returns the ID of the item in the array which is also it's position
@@ -56,6 +60,20 @@ public class FavoriteThings extends BaseAdapter {
         String shortFileName = longFileName.substring( index + 1 );
         String finalName = shortFileName.substring(0, shortFileName.lastIndexOf(".") );
         return finalName;
+    }
+
+    public void removeItem( int position ){
+        String fileName = getItemName(position) + ".jpg";
+        String root = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES).toString();
+        File myDir = new File(root + "/favorite_things");
+        File finalFile = new File( myDir, fileName );
+        finalFile.delete();
+        remove(position);
+    }
+
+    public void remove( int position ){
+        imagenames.remove(position);
+        this.notifyDataSetChanged();
     }
 
     // Builds the view for the Favorite Things

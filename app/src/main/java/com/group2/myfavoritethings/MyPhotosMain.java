@@ -10,6 +10,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -29,6 +30,7 @@ public class MyPhotosMain extends AppCompatActivity {
     String backupPath = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES).toString() + "/favorite_things";
     String name;
     GridView gridview;
+    public FavoriteThings faveThings;
     ArrayList<String> imagenames = new ArrayList<>();
     private BottomNavigationView bottomNav;
 
@@ -52,8 +54,20 @@ public class MyPhotosMain extends AppCompatActivity {
             }
         });
         initialMessage = findViewById(R.id.initialMessage);
-        gridview= findViewById(R.id.gridview);
-        gridview.setAdapter(new FavoriteThings(this, imagenames));
+        faveThings = new FavoriteThings(this, imagenames);
+        gridview = findViewById(R.id.gridview);
+        gridview.setAdapter(faveThings);
+
+        gridview.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> parent, View v, int position, long id) {
+                String itemName = faveThings.getItemName(position);
+                faveThings.removeItem(position);
+                Toast.makeText(getApplicationContext(), "Deleted Favorite Thing: " + itemName, Toast.LENGTH_SHORT).show();
+                faveThings.notifyDataSetChanged();
+                return true;
+            }
+        });
 
         // If there are any images in the favorite_things folder then we should change the default string
         if( imagenames.size() > 0 ){
@@ -92,8 +106,9 @@ public class MyPhotosMain extends AppCompatActivity {
     {
         File yourDir = new File(backupPath);
         for (File f : yourDir.listFiles()) {
-            if (f.isFile())
+            if (f.isFile()) {
                 name = f.getName();
+            }
             imagenames.add( backupPath+"/"+name);
 
         }
