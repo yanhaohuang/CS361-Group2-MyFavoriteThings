@@ -41,7 +41,7 @@ public class TodoListMain extends AppCompatActivity implements View.OnClickListe
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()) {
                     case R.id.navigation_home:
-                        Intent home = new Intent(TodoListMain.this,TodoListMain.class);
+                        Intent home = new Intent(TodoListMain.this,MainActivity.class);
                         startActivity(home);
                         break;
                     case R.id.navigation_todo:
