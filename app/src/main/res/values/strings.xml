@@ -7,4 +7,11 @@
     <string name="no_favorite_things">No Favorite Things</string>
     <string name="todo">TODO</string>
     <string name="add_this">Add This</string>
+    <string name="title_home">Home</string>
+    <string name="title_todo">Reminders</string>
+    <string name="title_add_photos">Favorite Things</string>
+    <string name="favorite_things">Favorite Things</string>
+    <string name="todo_list">Todo List</string>
+    <string name="enter_item">Enter Item</string>
+    <string name="add">add</string>
 </resources>

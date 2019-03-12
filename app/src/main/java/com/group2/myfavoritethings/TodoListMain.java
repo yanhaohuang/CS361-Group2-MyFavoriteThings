@@ -1,7 +1,11 @@
 package com.group2.myfavoritethings;
 
+import android.content.Intent;
+import android.support.annotation.NonNull;
+import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -17,6 +21,7 @@ public class TodoListMain extends AppCompatActivity implements View.OnClickListe
     private ListView itemsList;
     private ArrayList<String> items;
     private ArrayAdapter<String> adapter;
+    private BottomNavigationView bottomNav;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,6 +35,25 @@ public class TodoListMain extends AppCompatActivity implements View.OnClickListe
         itemsList.setAdapter(adapter);
         btn.setOnClickListener(this);
         itemsList.setOnItemClickListener(this);
+        bottomNav = findViewById(R.id.navigation);
+        bottomNav.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener(){
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                switch (item.getItemId()) {
+                    case R.id.navigation_home:
+                        Intent home = new Intent(TodoListMain.this,TodoListMain.class);
+                        startActivity(home);
+                        break;
+                    case R.id.navigation_todo:
+                        break;
+                    case R.id.navigation_photos:
+                        Intent faveThings = new Intent(TodoListMain.this,MyPhotosMain.class);
+                        startActivity(faveThings);
+                        break;
+                }
+                return false;
+            }
+        });
     }
 
     @Override
