@@ -86,7 +86,7 @@ public class FavoriteThings extends BaseAdapter {
             // Set up some options for our bitmap factory so that we don't run out of memory so quickly
             final BitmapFactory.Options options = new BitmapFactory.Options();
             options.inJustDecodeBounds = true;
-            options.inSampleSize = 2;
+            options.inSampleSize = 8;
             options.inJustDecodeBounds = false;
             options.inTempStorage = new byte[16 * 1024];
 
@@ -110,8 +110,15 @@ public class FavoriteThings extends BaseAdapter {
             // Turn the images into thumbnails to view
             Bitmap b = BitmapFactory.decodeFile(imagenames.get(position), options );
             // Resize the bitmap
-            Bitmap resizedBitmap = Bitmap.createScaledBitmap(b, 960, 730, false);
+            Bitmap resizedBitmap = Bitmap.createScaledBitmap(b, 480, 350, false);
             imageView.setImageBitmap(resizedBitmap);
+
+            // Clear out our bitmaps
+            if(b!=null)
+            {
+                b.recycle();
+                b = null;
+            }
 
             // Position the items
             imageView.setScaleType(ImageView.ScaleType.FIT_CENTER);
@@ -127,8 +134,6 @@ public class FavoriteThings extends BaseAdapter {
 
             linearlayout.addView(imageViewName);
 
-            // Clear out our bitmaps
-            b.recycle();
 
         } else {
             linearlayout = (LinearLayout) convertView;

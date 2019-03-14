@@ -96,7 +96,6 @@ public class MyPhotosMain extends AppCompatActivity {
 
     // If the user clicks on the floating button, then move them to that AddPhotos screen
     public void addNewFave( View v ) {
-        Toast.makeText(this, "Add New Favorite Thing", Toast.LENGTH_SHORT).show();
         Intent intent = new Intent(this, AddPhotos.class);
         startActivity(intent);
     }
